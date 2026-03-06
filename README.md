@@ -1,5 +1,3 @@
-#Telemetry Dashboard
-
 A real-time electric vehicle telemetry display built with Pygame. Reads live sensor data from shared memory and renders a dash showing power, speed, distance, energy consumption, and rolling efficiency.
 
 ---
