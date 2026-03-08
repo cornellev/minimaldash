@@ -7,7 +7,7 @@ from kivy.uix.label import Label
 from kivy.uix.floatlayout import FloatLayout
 import math
 from collections import deque
-from read_shm import SensorShmReader
+from uc26_sensor_reader.read_shm import SensorShmReader
 WINDOW_DURATION = 10.0# seconds for rolling efficiency window
 TIMESTAMP_WRAP= 70 * 60# seconds before timestamp rolls over
 METER_TO_MILE= 1 / 1609.344
