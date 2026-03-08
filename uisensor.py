@@ -23,7 +23,7 @@ class TelemetryState:
         self.speed_mph     = 0.0
 
     def update(self, snap):
-        ts = snap["ts"]
+        ts = snap["global_ts"]
         if self.last_ts is None:
             self.last_ts = ts
             return
