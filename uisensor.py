@@ -33,7 +33,7 @@ class TelemetryState:
         if dt <= 0:
             return
         self.last_ts = ts
-        speed_mps= snap["velocity"]# m/s from sensor
+        speed_mps= snap["gps"]["speed"]# m/s from sensor
         self.speed_mph= speed_mps * MPS_TO_MPH
         current= snap["power"]["current"]
         voltage= snap["power"]["voltage"]
