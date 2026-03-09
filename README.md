@@ -28,6 +28,9 @@ pip install kivy
 
 ### 2. Build and run sensor writer (Linux target)
 
+This step is usually not necessary as these processes should be running as systemd services.
+You can probably check with `systemctl status uc26_sensor.service`. Otherwise,
+
 ```bash
 cd uc26_sensor_reader
 g++ -O2 -std=c++17 write_shm.cpp -lpigpiod_if2 -lrt -pthread -o shm_writer
