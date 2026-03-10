@@ -12,6 +12,8 @@ WINDOW_DURATION = 10.0# seconds for rolling efficiency window
 TIMESTAMP_WRAP= 70 * 60# seconds before timestamp rolls over
 METER_TO_MILE= 1 / 1609.344
 MPS_TO_MPH = 2.23694
+MAX_SPEED=40
+MAX_EFFECIENCY=10
 class TelemetryState:
     def __init__(self):
         self.last_ts       = None
@@ -176,13 +178,13 @@ class Dashboard(FloatLayout):
         # max_value: set to expected max speed / efficiency ceiling
         self.left_gauge = CircularGauge(
             title="Efficiency", unit="mi/kWh",
-            show_dot=False, max_value=10,
+            show_dot=False, max_value=MAX_EFFECIENCY,
             size_hint=(0.42, 0.7),
             pos_hint={"x": 0.02, "center_y": 0.6}
         )
         self.right_gauge = CircularGauge(
             title="Speed", unit="mph",
-            show_dot=True, max_value=40,
+            show_dot=True, max_value=MAX_SPEED,
             size_hint=(0.42, 0.7),
             pos_hint={"right": 0.98, "center_y": 0.6}
         )
