@@ -22,10 +22,10 @@ minimaldash/
 ### 1. Create and activate virtual environment
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv kivy_venv
+source kivy_venv/bin/activate
 pip install --upgrade pip
-pip install kivy
+python -m pip install "kivy[full]"
 ```
 
 ### 2. Build and run sensor writer (Linux target)
