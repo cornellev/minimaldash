@@ -1,92 +1,48 @@
-A real-time electric vehicle telemetry display built with Pygame. Reads live sensor data from shared memory and renders a dash showing power, speed, distance, energy consumption, and rolling efficiency.
+# Minimal Dash
+
+Real-time EV telemetry dashboard for UC26. Reads live sensor snapshots from shared memory and renders speed + efficiency on a Kivy UI.
 
 ---
 
-## Features
-
-- **Live sensor ingestion** — reads from shared memory via `SensorShmReader` at up to 200 Hz
-- **GPS-based distance tracking** — uses local tangent plane (ENU) projection for accurate incremental distance
-- **Energy accounting** — integrates power over time to compute total energy consumed in kWh
-- **Rolling efficiency** — computes miles/kWh over a configurable sliding window (default: 10 seconds)
-- **Dash screen** — clean Pygame display designed for in-vehicle use
-
----
-
-## Display Fields
-
-| Field | Description |
-|---|---|
-| `Seq` | Snapshot sequence number |
-| `Power` | Instantaneous power (W) |
-| `Speed` | Current speed (m/s) |
-| `Distance` | Total distance traveled (miles) |
-| `Energy` | Total energy consumed (kWh) |
-| `Efficiency (10s)` | Rolling average efficiency (mi/kWh) |
-
----
-
-## Requirements
-
-```
-pygame
-pymap3d
-```
-
-You will also need:
-- `read_shm.py` — provides `SensorShmReader`, which exposes live sensor snapshots via shared memory
-
-Install dependencies:
-
-```bash
-pip install pygame pymap3d
-```
-
----
-
-## Usage
-
-```bash
-python dash.py
-```
-
-Press `Ctrl+C` or close the window to exit.
-
----
-
-## Expected Snapshot Format
-
-`SensorShmReader.read_snapshot_dict()` should return a dictionary with the following structure:
-
-```python
-{
-    "seq": int,
-    "ts": float,           # timestamp in seconds
-    "power": {
-        "current": float,  # amps
-        "voltage": float,  # volts
-    },
-    "gps": {
-        "gps_lat": float,
-        "gps_long": float,
-    }
-}
-```
-
----
-
-## Configuration
-
-| Constant | Default | Description |
-|---|---|---|
-| `WINDOW_DURATION` | `10.0` s | Sliding window for efficiency calculation |
-| `TIMESTAMP_WRAP` | `4200` s (70 min) | Timestamp rollover period |
-
----
+<img width="797" height="366" alt="Screenshot 2026-03-09 at 3 43 44 PM" src="https://github.com/user-attachments/assets/f24fb8f9-cc26-490d-af50-4ee2fe643bc9" />
 
 ## Project Structure
 
+```text
+minimaldash/
+├─ uisensor.py                              # Main dashboard (live shared-memory data)
+├─ uitest.py                                # Dashboard simulator
+└─ README.md
 ```
-.
-├── dash.py      # Main dashboard application 
-└── README.md
+
+---
+
+## Quick Start (Local Development)
+
+### 1. Create and activate virtual environment
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install kivy
+```
+
+### 2. Build and run sensor writer (Linux target)
+
+This step is usually not necessary as these processes should be running as systemd services.
+You can probably check with `systemctl status uc26_sensor.service`. Otherwise,
+
+```bash
+cd uc26_sensor_reader
+g++ -O2 -std=c++17 write_shm.cpp -lpigpiod_if2 -lrt -pthread -o shm_writer
+sudo pigpiod
+./shm_writer
+```
+
+### 3. Run dashboard on LCD display session
+
+```bash
+export DISPLAY=:0
+python uisensor.py
 ```
