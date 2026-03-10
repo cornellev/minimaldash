@@ -71,7 +71,6 @@ class CircularGauge(Widget):
 
         self.title_label = Label(
             text=title, bold=True,
-            font_name="DSEG7Classic-Bold.ttf",
             size_hint=(None, None)
         )
         self.add_widget(self.title_label)
