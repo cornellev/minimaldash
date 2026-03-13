@@ -1,4 +1,6 @@
 from kivy.app import App
+from kivy.core.window import Window
+Window.fullscreen = 'auto'
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Line, Ellipse, Mesh
 from kivy.clock import Clock
