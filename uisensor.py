@@ -161,17 +161,17 @@ class Dashboard(FloatLayout):
             title="Efficiency", unit="mi/kWh",
             show_dot=False, max_value=MAX_EFFECIENCY,
             size_hint=(0.42, 0.7),
-            pos_hint={"x": 0.02, "center_y": 0.6}
+            pos_hint={"x": 0.02, "center_y": 0.5}
         )
         self.right_gauge = CircularGauge(
             title="Speed", unit="mph",
             show_dot=True, max_value=MAX_SPEED,
             size_hint=(0.42, 0.7),
-            pos_hint={"right": 0.98, "center_y": 0.6}
+            pos_hint={"right": 0.98, "center_y": 0.5}
         )
         self.arrow = DirectionArrow(
             size_hint=(0.14, 0.35),
-            pos_hint={"center_x": 0.5, "center_y": 0.55}
+            pos_hint={"center_x": 0.5, "center_y": 0.5}
         )
 
         self.add_widget(self.left_gauge)
