@@ -1,6 +1,6 @@
 from kivy.app import App
 from kivy.core.window import Window
-Window.fullscreen = 'auto'
+#Window.fullscreen = 'auto'
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Line, Ellipse, Mesh
 from kivy.clock import Clock
@@ -9,7 +9,8 @@ from kivy.uix.label import Label
 from kivy.uix.floatlayout import FloatLayout
 import math
 import random
-
+IDEAL_SPEED=20
+MAX_SPEED=40
 
 class CircularGauge(Widget):
     value = NumericProperty(0)
@@ -71,7 +72,7 @@ class CircularGauge(Widget):
 
             # Green dot marker at 3 o'clock (0° / max position)
             if self.show_dot:
-                marker_angle = 30  # 3 o'clock in standard math coords
+                marker_angle = 180-(IDEAL_SPEED / MAX_SPEED) * 180
                 mx = cx + radius * math.cos(math.radians(marker_angle))
                 my = cy + radius * math.sin(math.radians(marker_angle))
                 Color(0.12, 0.78, 0.35)
