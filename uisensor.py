@@ -6,9 +6,7 @@ from kivy.properties import NumericProperty
 from kivy.uix.label import Label
 from kivy.uix.floatlayout import FloatLayout
 import math
-from collections import deque
 from uc26_sensor_reader.read_shm import SensorShmReader
-WINDOW_DURATION = 10.0# seconds for rolling efficiency window
 TIMESTAMP_WRAP= 70 * 60# seconds before timestamp rolls over
 METER_TO_MILE= 1 / 1609.344
 MPS_TO_MPH = 2.23694
@@ -16,13 +14,9 @@ MAX_SPEED=40
 MAX_EFFECIENCY=10
 class TelemetryState:
     def __init__(self):
-        self.last_ts       = None
-        self.total_energy_j = 0.0
-        self.window_queue  = deque()# (ts, energy_inc)
-        self.window_energy = 0.0
-        self.window_distance_m = 0.0
+        self.last_ts   = None
         self.miles_per_kwh = 0.0
-        self.speed_mph     = 0.0
+        self.speed_mph = 0.0
 
     def update(self, snap):
         ts = snap["global_ts"]
@@ -35,27 +29,13 @@ class TelemetryState:
         if dt <= 0:
             return
         self.last_ts = ts
-        speed_mps= snap["gps"]["speed"]# m/s from sensor
-        self.speed_mph= speed_mps * MPS_TO_MPH
-        current= snap["power"]["current"]
-        voltage= snap["power"]["voltage"]
-        power= current * voltage
-        energy_inc = power * dt# joules
-        self.total_energy_j += energy_inc
-
-        distance_inc_m = speed_mps * dt# meters this tick
-
-        self.window_queue.append((ts, energy_inc, distance_inc_m))
-        self.window_energy+= energy_inc
-        self.window_distance_m += distance_inc_m
-        while self.window_queue and ts - self.window_queue[0][0] > WINDOW_DURATION:
-            _, old_e, old_d = self.window_queue.popleft()
-            self.window_energy-= old_e
-            self.window_distance_m -= old_d
-        if self.window_energy > 0:
-            energy_kwh= self.window_energy / 3_600_000
-            miles= self.window_distance_m * METER_TO_MILE
-            self.miles_per_kwh = miles / energy_kwh
+        speed_mps = snap["filtered"]["speed"]# m/s from sensor
+        self.speed_mph = speed_mps * MPS_TO_MPH
+        current = snap["power"]["current"]
+        voltage = snap["power"]["voltage"]
+        kilowatts = (current * voltage) / 1000.0
+        if kilowatts > 0:
+            self.miles_per_kwh = self.speed_mph / kilowatts
         else:
             self.miles_per_kwh = 0.0
 
