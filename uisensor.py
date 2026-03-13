@@ -91,7 +91,7 @@ class CircularGauge(Widget):
                  width=max(2, radius * 0.1))
 
             if self.show_dot:
-                marker_angle = -90 + (IDEAL_SPEED / MAX_SPEED) * 180
+                marker_angle = -90 + (IDEAL_SPEED / MAX_SPEED) * 90
                 mx = cx + radius * math.cos(math.radians(marker_angle))
                 my = cy + radius * math.sin(math.radians(marker_angle))
                 Color(0.12, 0.78, 0.35)
