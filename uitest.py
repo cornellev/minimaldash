@@ -173,13 +173,6 @@ class Dashboard(FloatLayout):
             size_hint=(0.14, 0.35),
             pos_hint={"center_x": 0.5, "center_y": 0.55}
         )
-        self.light_image = Image(
-            source="fulllight.png",
-            size_hint=(None, None),
-            size=(900, 900),
-            pos_hint={"x": 0.01, "y": 0.01}
-        )
-        self.add_widget(self.light_image)
         self.add_widget(self.left_gauge)
         self.add_widget(self.right_gauge)
         self.add_widget(self.arrow)

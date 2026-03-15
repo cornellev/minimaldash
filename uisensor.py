@@ -131,14 +131,7 @@ class Dashboard(FloatLayout):
         self.add_widget(self.left_gauge)
         self.add_widget(self.right_gauge)
 
-        self.light_image = Image(
-            source="fulllight.png",
-            size_hint=(None, None),
-            size=(900, 900),
-            pos_hint={"x": 0.01, "y": 0.01}
-        )
-        self.add_widget(self.light_image)
-
+        
         self.reader = SensorShmReader()
         self.state  = TelemetryState()
 
