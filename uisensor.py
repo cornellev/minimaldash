@@ -37,7 +37,7 @@ class TelemetryState:
         current = snap["power"]["current"]
         voltage = snap["power"]["voltage"]
         kilowatts = (current * voltage) / 1000.0
-        if kilowatts > 0 and self.speed_mph/kilowatts<=500:
+        if kilowatts > 0 and self.speed_mph/kilowatts<=1000:
             self.miles_per_kwh = self.speed_mph / kilowatts
         else:
             self.miles_per_kwh = 0.0
