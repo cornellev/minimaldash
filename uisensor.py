@@ -7,6 +7,7 @@ from kivy.clock import Clock
 from kivy.properties import NumericProperty
 from kivy.uix.label import Label
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.image import Image
 import math
 from uc26_sensor_reader.read_shm import SensorShmReader
 TIMESTAMP_WRAP= 70 * 60# seconds before timestamp rolls over
@@ -129,6 +130,14 @@ class Dashboard(FloatLayout):
         )
         self.add_widget(self.left_gauge)
         self.add_widget(self.right_gauge)
+
+        self.light_image = Image(
+            source="fulllight.png",
+            size_hint=(None, None),
+            size=(80, 80),
+            pos_hint={"x": 0.01, "y": 0.01}
+        )
+        self.add_widget(self.light_image)
 
         self.reader = SensorShmReader()
         self.state  = TelemetryState()

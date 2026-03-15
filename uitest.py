@@ -1,12 +1,13 @@
 from kivy.app import App
 from kivy.core.window import Window
-#Window.fullscreen = 'auto'
+Window.fullscreen = 'auto'
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Line, Ellipse, Mesh
 from kivy.clock import Clock
 from kivy.properties import NumericProperty
 from kivy.uix.label import Label
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.image import Image
 import math
 import random
 IDEAL_SPEED=20
@@ -172,13 +173,20 @@ class Dashboard(FloatLayout):
             size_hint=(0.14, 0.35),
             pos_hint={"center_x": 0.5, "center_y": 0.55}
         )
-
+        self.light_image = Image(
+            source="fulllight.png",
+            size_hint=(None, None),
+            size=(900, 900),
+            pos_hint={"x": 0.01, "y": 0.01}
+        )
+        self.add_widget(self.light_image)
         self.add_widget(self.left_gauge)
         self.add_widget(self.right_gauge)
         self.add_widget(self.arrow)
 
         self._t = 0.0
         Clock.schedule_interval(self.simulate_speed, 0.03)
+
 
     def simulate_speed(self, dt):
         self._t += dt
