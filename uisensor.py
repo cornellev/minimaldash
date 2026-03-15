@@ -134,7 +134,7 @@ class Dashboard(FloatLayout):
         self.light_image = Image(
             source="fulllight.png",
             size_hint=(None, None),
-            size=(80, 80),
+            size=(900, 900),
             pos_hint={"x": 0.01, "y": 0.01}
         )
         self.add_widget(self.light_image)
