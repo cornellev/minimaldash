@@ -67,7 +67,7 @@ class CircularGauge(Widget):
 
         self.unit_label = Label(text=unit, size_hint=(None, None))
         self.add_widget(self.unit_label)
-
+        
         Clock.schedule_interval(self.update_gauge, 1 / 10)
 
     def update_gauge(self, dt):
@@ -78,7 +78,7 @@ class CircularGauge(Widget):
 
         arc_start= -90
         arc_end= 90
-        progress_angle = (self.value / self.max_value) * 180
+        progress_angle = (min(self.value, self.max_value) / self.max_value) * 180
         end_angle= arc_start + progress_angle
 
         with self.canvas.before:
