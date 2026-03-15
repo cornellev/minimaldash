@@ -13,7 +13,7 @@ TIMESTAMP_WRAP= 70 * 60# seconds before timestamp rolls over
 METER_TO_MILE= 1 / 1609.344
 MPS_TO_MPH = 2.23694
 MAX_SPEED=40
-MAX_EFFECIENCY=10
+MAX_EFFECIENCY=500
 IDEAL_SPEED=20
 class TelemetryState:
     def __init__(self):
@@ -37,7 +37,7 @@ class TelemetryState:
         current = snap["power"]["current"]
         voltage = snap["power"]["voltage"]
         kilowatts = (current * voltage) / 1000.0
-        if kilowatts > 0:
+        if kilowatts > 0 and self.speed_mph/kilowatts<=500:
             self.miles_per_kwh = self.speed_mph / kilowatts
         else:
             self.miles_per_kwh = 0.0
@@ -68,7 +68,7 @@ class CircularGauge(Widget):
         self.unit_label = Label(text=unit, size_hint=(None, None))
         self.add_widget(self.unit_label)
 
-        Clock.schedule_interval(self.update_gauge, 1 / 30)
+        Clock.schedule_interval(self.update_gauge, 1 / 10)
 
     def update_gauge(self, dt):
         self.canvas.before.clear()
