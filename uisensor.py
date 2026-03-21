@@ -14,7 +14,7 @@ TIMESTAMP_WRAP= 70 * 60# seconds before timestamp rolls over
 METER_TO_MILE= 1 / 1609.344
 MPS_TO_MPH = 2.23694
 MAX_SPEED=40
-MAX_EFFECIENCY=500
+MAX_EFFECIENCY=50
 IDEAL_SPEED=20
 class TelemetryState:
     def __init__(self):

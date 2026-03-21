@@ -175,19 +175,18 @@ class Dashboard(FloatLayout):
 
         self.arrow = DirectionArrow(
             size_hint=(0.14, 0.35),
-            pos_hint={"center_x": 0.5, "center_y": 0.55}
+            pos_hint={"center_x": 0.5, "center_y": 0.45}
         )
         self.light_image = Image(
             source="fulllight.png",
             size_hint=(None, None),
-            size=(1000, 1000),
-            pos_hint={"x": 0.01, "y": 0.01}
+            size=(500, 500),
+            pos_hint={"x": 0.01, "y": 0.1}
         )
         self.add_widget(self.light_image)
         self.add_widget(self.left_gauge)
         self.add_widget(self.right_gauge)
         self.add_widget(self.arrow)
-
         self._t = 0.0
         Clock.schedule_interval(self.simulate_speed, 0.03)
 
@@ -195,7 +194,7 @@ class Dashboard(FloatLayout):
     def simulate_speed(self, dt):
         self._t += dt
         # target ~100 so the bar hovers around the middle of the semicircle
-        target = 50
+        target = 20
         value = max(0, min(200,
             target
             + 15 * math.sin(self._t * 1.1)
