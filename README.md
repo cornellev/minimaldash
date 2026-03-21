@@ -3,8 +3,11 @@
 Real-time EV telemetry dashboard for UC26. Reads live sensor snapshots from shared memory and renders speed + efficiency on a Kivy UI.
 
 ---
+<p align="center">
+<img width="789" height="456" alt="Screenshot 2026-03-21 at 3 00 10 PM" src="https://github.com/user-attachments/assets/35a6306e-c61e-4db4-a2ed-56ef1f563a83" />
+</p>
 
-<img width="797" height="366" alt="Screenshot 2026-03-09 at 3 43 44 PM" src="https://github.com/user-attachments/assets/f24fb8f9-cc26-490d-af50-4ee2fe643bc9" />
+
 
 ## Project Structure
 
