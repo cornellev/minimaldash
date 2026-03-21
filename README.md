@@ -4,8 +4,10 @@ Real-time EV telemetry dashboard for UC26. Reads live sensor snapshots from shar
 
 ---
 <p align="center">
-<img width="785" height="453" alt="Screenshot 2026-03-21 at 2 50 44 PM" src="https://github.com/user-attachments/assets/deda50de-11e4-461e-9957-6afc63213abe" />
+<img width="789" height="456" alt="Screenshot 2026-03-21 at 3 00 10 PM" src="https://github.com/user-attachments/assets/35a6306e-c61e-4db4-a2ed-56ef1f563a83" />
 </p>
+
+
 
 ## Project Structure
 
