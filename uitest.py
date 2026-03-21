@@ -1,6 +1,5 @@
 from kivy.app import App
 from kivy.core.window import Window
-Window.fullscreen = 'auto'
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Line, Ellipse, Mesh
 from kivy.clock import Clock
@@ -11,7 +10,7 @@ from kivy.uix.image import Image
 import math
 import random
 IDEAL_SPEED=20
-MAX_SPEED=40
+MAX_SPEED=100
 
 class CircularGauge(Widget):
     value = NumericProperty(0)
@@ -83,7 +82,12 @@ class CircularGauge(Widget):
 
         self.label.center = (self.center[0], self.center[1] + radius * 0.12)
         self.label.font_size = radius * 0.5
-        self.label.text = str(int(self.value))
+        if self.value > self.max_value and self.unit == "mi/kWh":
+            self.label.font_name = "Roboto"  # system font for text
+            self.label.text = "HIGH"
+        else:
+            self.label.font_name = "Roboto"
+            self.label.text = f"{self.value:.1f}"
 
         self.unit_label.center = (self.center[0], self.center[1] - radius * 0.25)
         self.unit_label.font_size = radius * 0.22
@@ -173,6 +177,13 @@ class Dashboard(FloatLayout):
             size_hint=(0.14, 0.35),
             pos_hint={"center_x": 0.5, "center_y": 0.55}
         )
+        self.light_image = Image(
+            source="fulllight.png",
+            size_hint=(None, None),
+            size=(1000, 1000),
+            pos_hint={"x": 0.01, "y": 0.01}
+        )
+        self.add_widget(self.light_image)
         self.add_widget(self.left_gauge)
         self.add_widget(self.right_gauge)
         self.add_widget(self.arrow)
@@ -184,7 +195,7 @@ class Dashboard(FloatLayout):
     def simulate_speed(self, dt):
         self._t += dt
         # target ~100 so the bar hovers around the middle of the semicircle
-        target = 15
+        target = 50
         value = max(0, min(200,
             target
             + 15 * math.sin(self._t * 1.1)

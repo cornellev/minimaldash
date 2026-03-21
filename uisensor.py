@@ -101,7 +101,13 @@ class CircularGauge(Widget):
 
         self.label.center= (self.center[0], self.center[1] + radius * 0.12)
         self.label.font_size = radius * 0.5
-        self.label.text = f"{self.value:.1f}"
+        self.label.font_name = "DSEG7Classic-Bold.ttf"  # keep for numbers
+        if self.value > self.max_value and self.unit == "mi/kWh":
+            self.label.font_name = ""  # system font for text
+            self.label.text = "HIGH"
+        else:
+            self.label.font_name = "DSEG7Classic-Bold.ttf"
+            self.label.text = f"{self.value:.1f}"
 
         self.unit_label.center= (self.center[0], self.center[1] - radius * 0.25)
         self.unit_label.font_size = radius * 0.22
@@ -128,6 +134,13 @@ class Dashboard(FloatLayout):
             size_hint=(0.42, 0.7),
             pos_hint={"right": 0.98, "center_y": 0.5}
         )
+        self.light_image = Image(
+            source="fulllight.png",
+            size_hint=(None, None),
+            size=(1000, 1000),
+            pos_hint={"x": 0.01, "y": 0.01}
+        )
+        self.add_widget(self.light_image)
         self.add_widget(self.left_gauge)
         self.add_widget(self.right_gauge)
 
