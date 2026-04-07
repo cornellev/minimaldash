@@ -103,7 +103,7 @@ class CircularGauge(Widget):
         self.label.font_size = radius * 0.5
         self.label.font_name = "DSEG7Classic-Bold.ttf"  # keep for numbers
         if self.value > self.max_value and self.unit == "mi/kWh":
-            self.label.font_name = ""  # system font for text
+            # self.label.font_name = ""  # system font for text
             self.label.text = "HIGH"
         else:
             self.label.font_name = "DSEG7Classic-Bold.ttf"
