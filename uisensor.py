@@ -135,13 +135,22 @@ class Dashboard(FloatLayout):
             size_hint=(0.42, 0.7),
             pos_hint={"right": 0.98, "center_y": 0.5}
         )
-        self.light_image = Image(
-            source="fulllight.png",
+        # self.light_image = Image(
+        #     source="fulllight.png",
+        #     size_hint=(None, None),
+        #     size=(100, 100),
+        #     pos_hint={"x": 0.01, "y": 0.01}
+        # )
+        # self.add_widget(self.light_image)
+
+        self.text_box = Label(
+            text="Dodo Drifter UC2026 🦤",
             size_hint=(None, None),
             size=(100, 100),
             pos_hint={"x": 0.01, "y": 0.01}
         )
-        self.add_widget(self.light_image)
+        self.add_widget(self.text_box)
+
         self.add_widget(self.left_gauge)
         self.add_widget(self.right_gauge)
 

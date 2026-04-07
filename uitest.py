@@ -1,5 +1,6 @@
 from kivy.app import App
 from kivy.core.window import Window
+from kivy.core.text import DEFAULT_FONT
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Line, Ellipse, Mesh
 from kivy.clock import Clock
@@ -83,8 +84,8 @@ class CircularGauge(Widget):
         self.label.center = (self.center[0], self.center[1] + radius * 0.12)
         self.label.font_size = radius * 0.5
         if self.value > self.max_value and self.unit == "mi/kWh":
-            self.label.font_name = "Roboto"  # system font for text
-            self.label.text = "HIGH"
+            self.label.font_name = DEFAULT_FONT  # system font for text
+            self.label.text = "max"
         else:
             self.label.font_name = "Roboto"
             self.label.text = f"{self.value:.1f}"
@@ -177,13 +178,22 @@ class Dashboard(FloatLayout):
             size_hint=(0.14, 0.35),
             pos_hint={"center_x": 0.5, "center_y": 0.45}
         )
-        self.light_image = Image(
-            source="fulllight.png",
+        # self.light_image = Image(
+        #     source="fulllight.png",
+        #     size_hint=(None, None),
+        #     size=(500, 500),
+        #     pos_hint={"x": 0.01, "y": 0.1}
+        # )
+        #self.add_widget(self.light_image)
+
+        self.text_box = Label(
+            text="Dodo Drifter UC2026 🦤",
             size_hint=(None, None),
-            size=(500, 500),
-            pos_hint={"x": 0.01, "y": 0.1}
+            size=(100, 100),
+            pos_hint={"x": 0.01, "y": 0.01}
         )
-        self.add_widget(self.light_image)
+        self.add_widget(self.text_box)
+
         self.add_widget(self.left_gauge)
         self.add_widget(self.right_gauge)
         self.add_widget(self.arrow)
