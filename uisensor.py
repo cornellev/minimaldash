@@ -1,5 +1,6 @@
 from kivy.app import App
 from kivy.core.window import Window
+from kivy.core.font import DEFAULT_FONT
 Window.fullscreen = 'auto'
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Line, Ellipse
@@ -103,8 +104,8 @@ class CircularGauge(Widget):
         self.label.font_size = radius * 0.5
         self.label.font_name = "DSEG7Classic-Bold.ttf"  # keep for numbers
         if self.value > self.max_value and self.unit == "mi/kWh":
-            # self.label.font_name = ""  # system font for text
-            self.label.text = "max"
+            self.label.font_name = DEFAULT_FONT
+            self.label.text = "MAX"
         else:
             self.label.font_name = "DSEG7Classic-Bold.ttf"
             self.label.text = f"{self.value:.1f}"
