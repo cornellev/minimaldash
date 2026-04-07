@@ -144,11 +144,18 @@ class Dashboard(FloatLayout):
         # self.add_widget(self.light_image)
 
         self.text_box = Label(
-            text="Dodo Drifter UC2026 🦤",
-            size_hint=(0.5, 0.5),
-            # size=(500, 500),
-            pos_hint={"x": 0.5, "y": 0.5}
+            text="Dodo Drifter UC2026",
+            size_hint=(1, None),
+            height=120,
+            pos_hint={"center_x": 0.5, "y": 0.02},
+
+            font_size=32,
+            halign="center",
+            valign="middle"
         )
+
+        self.text_box.bind(size=lambda inst, val: setattr(inst, "text_size", val))
+
         self.add_widget(self.text_box)
 
         self.add_widget(self.left_gauge)
