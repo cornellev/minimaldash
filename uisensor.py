@@ -1,6 +1,6 @@
 from kivy.app import App
 from kivy.core.window import Window
-from kivy.core.font import DEFAULT_FONT
+from kivy.core.text import DEFAULT_FONT
 Window.fullscreen = 'auto'
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Line, Ellipse
