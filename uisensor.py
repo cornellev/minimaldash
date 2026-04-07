@@ -147,7 +147,7 @@ class Dashboard(FloatLayout):
             text="Dodo Drifter UC2026 🦤",
             size_hint=(0.5, 0.5),
             # size=(500, 500),
-            pos_hint={"x": 1, "y": 1}
+            pos_hint={"x": 0.5, "y": 0.5}
         )
         self.add_widget(self.text_box)
 
